@@ -8,33 +8,37 @@
     <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Aclonica">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Akronim">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Alex+Brush">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Alfa+Slab+One">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Arizonia">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Autour+One">
     <link rel="stylesheet" href="assets/fonts/fontawesome-all.min.css">
     <link rel="stylesheet" href="assets/fonts/font-awesome.min.css">
     <link rel="stylesheet" href="assets/fonts/fontawesome5-overrides.min.css">
-    <script type="text/javascript" src="database.js" ></script>
 </head>
 
-<body id="page-top" onload="startDB();">
+<body id="page-top">
     <div id="wrapper">
-        <nav class="navbar navbar-dark align-items-start sidebar sidebar-dark accordion bg-gradient-primary p-0">
+        <nav class="navbar navbar-dark align-items-start sidebar sidebar-dark accordion bg-gradient-primary p-0" style="background: url(&quot;assets/img/logos/890403.jpg&quot;);">
             <div class="container-fluid d-flex flex-column p-0"><a class="navbar-brand d-flex justify-content-center align-items-center sidebar-brand m-0" href="#">
-                    <div class="sidebar-brand-icon rotate-n-15"><i class="fas fa-laugh-wink"></i></div>
-                    <div class="sidebar-brand-text mx-3"><span>Brand</span></div>
+                    <div class="sidebar-brand-icon rotate-n-15"></div><span class="text-center" style="font-family: Aclonica, sans-serif;text-align: left;font-size: 16;">MeNú<i class="fa fa-diamond" style="color: rgb(255,255,255);"></i></span>
+                    <div class="sidebar-brand-text mx-3"></div>
                 </a>
                 <hr class="sidebar-divider my-0">
-                <ul class="navbar-nav text-light" id="accordionSidebar">
-                    <li class="nav-item"><a class="nav-link" href="4Balance.html"><i class="fas fa-tachometer-alt"></i><span>Dashboard</span></a></li>
-                    <li class="nav-item"><a class="nav-link" href="3Venta.html"><i class="fas fa-user"></i><span>Profile</span></a></li>
-                    <li class="nav-item"><a class="nav-link" href="2Añadir.html"><i class="fas fa-table"></i><span>Table</span></a></li>
-                    <li class="nav-item"><a class="nav-link" href="1Inicio.html"><i class="far fa-user-circle"></i><span>Login</span></a></li>
-                    <li class="nav-item"><a class="nav-link" href="register.html"><i class="fas fa-user-circle"></i><span>Register</span></a></li>
+                <ul class="navbar-nav text-light" id="accordionSidebar" style="font-family: 'Autour One', cursive;">
+                    <li class="nav-item"><a class="nav-link text-monospace" href="1Inicio.html" style="color: rgb(255,255,255);"><i class="fa fa-linux" style="color: rgb(255,255,255);"></i><span class="text-justify text-white" style="font-family: Aclonica, sans-serif;font-size: 15;"><strong>Inicio</strong></span></a></li>
+                    <li class="nav-item"><a class="nav-link" href="2Añadir.html" style="font-family: Aclonica, sans-serif;"><i class="fa fa-building" style="color: rgb(255,255,255);"></i><span style="font-family: Aclonica, sans-serif;font-size: 20;"><strong>Añadir y Eliminar</strong></span></a></li>
+                    <li class="nav-item"><a class="nav-link" href="3Venta.html" style="font-family: Aclonica, sans-serif;"><i class="fa fa-line-chart" style="color: rgb(255,255,255);"></i><span style="color: rgb(255,255,255);font-family: Aclonica, sans-serif;text-align: center;"><strong>Venta</strong></span></a></li>
+                    <li class="nav-item"><a class="nav-link text-nowrap" href="4Balance.html"><i class="fa fa-pie-chart" style="color: rgb(255,255,255);"></i><span style="color: rgb(255,255,255);font-family: Aclonica, sans-serif;"><strong>Balance</strong></span></a></li>
+                    <li class="nav-item"><a class="nav-link text-nowrap active" href="5Stock.html"><i class="fa fa-heartbeat" style="color: rgb(255,255,255);"></i><span style="color: rgb(255,255,255);font-family: Aclonica, sans-serif;"><strong>Stock</strong></span></a></li>
                 </ul>
-                <div class="text-center d-none d-md-inline"><button class="btn rounded-circle border-0" id="sidebarToggle" type="button"></button></div>
+                <div class="text-center d-none d-md-inline"></div>
             </div>
         </nav>
         <div class="d-flex flex-column" id="content-wrapper">
             <div id="content">
-                <nav class="navbar navbar-light navbar-expand bg-white shadow mb-4 topbar static-top">
+                <nav class="navbar navbar-light navbar-expand bg-white shadow mb-4 topbar static-top" style="background: url(&quot;assets/img/logos/719982.jpg&quot;);">
                     <div class="container-fluid"><button class="btn btn-link d-md-none rounded-circle mr-3" id="sidebarToggleTop" type="button"><i class="fas fa-bars"></i></button>
                         <form class="form-inline d-none d-sm-inline-block mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
                             <div class="input-group"><input class="bg-light form-control border-0 small" type="text" placeholder="Search for ...">
@@ -52,7 +56,7 @@
                                 </div>
                             </li>
                             <li class="nav-item dropdown no-arrow mx-1">
-                                <div class="nav-item dropdown no-arrow"><a class="dropdown-toggle nav-link" aria-expanded="false" data-toggle="dropdown" href="#"><span class="badge badge-danger badge-counter">3+</span><i class="fas fa-bell fa-fw"></i></a>
+                                <div class="nav-item dropdown no-arrow"><a class="dropdown-toggle nav-link" aria-expanded="false" data-toggle="dropdown" href="#"></a>
                                     <div class="dropdown-menu dropdown-menu-right dropdown-list animated--grow-in">
                                         <h6 class="dropdown-header">alerts center</h6><a class="dropdown-item d-flex align-items-center" href="#">
                                             <div class="mr-3">
@@ -80,7 +84,7 @@
                                 </div>
                             </li>
                             <li class="nav-item dropdown no-arrow mx-1">
-                                <div class="nav-item dropdown no-arrow"><a class="dropdown-toggle nav-link" aria-expanded="false" data-toggle="dropdown" href="#"><span class="badge badge-danger badge-counter">7</span><i class="fas fa-envelope fa-fw"></i></a>
+                                <div class="nav-item dropdown no-arrow"><a class="dropdown-toggle nav-link" aria-expanded="false" data-toggle="dropdown" href="#"></a>
                                     <div class="dropdown-menu dropdown-menu-right dropdown-list animated--grow-in">
                                         <h6 class="dropdown-header">alerts center</h6><a class="dropdown-item d-flex align-items-center" href="#">
                                             <div class="dropdown-list-image mr-3"><img class="rounded-circle" src="assets/img/avatars/avatar4.jpeg">
@@ -121,7 +125,7 @@
                             </li>
                             <div class="d-none d-sm-block topbar-divider"></div>
                             <li class="nav-item dropdown no-arrow">
-                                <div class="nav-item dropdown no-arrow"><a class="dropdown-toggle nav-link" aria-expanded="false" data-toggle="dropdown" href="#"><span class="d-none d-lg-inline mr-2 text-gray-600 small">Valerie Luna</span><img class="border rounded-circle img-profile" src="assets/img/avatars/avatar1.jpeg"></a>
+                                <div class="nav-item dropdown no-arrow"><a class="dropdown-toggle nav-link" aria-expanded="false" data-toggle="dropdown" href="#"><span class="text-white d-none d-lg-inline mr-2 text-gray-600 small" style="font-family: Aclonica, sans-serif;text-align: center;color: rgb(255,255,255);border-color: rgb(255,255,255);filter: brightness(200%);"><strong>Thelma Romero</strong></span><img class="border rounded-circle img-profile" src="assets/img/avatars/water-lily-g3d6bc4313_640.jpg" style="background: url(&quot;assets/img/logos/water-lily-g3d6bc4313_640.jpg&quot;);"></a>
                                     <div class="dropdown-menu shadow dropdown-menu-right animated--grow-in"><a class="dropdown-item" href="#"><i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>&nbsp;Profile</a><a class="dropdown-item" href="#"><i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>&nbsp;Settings</a><a class="dropdown-item" href="#"><i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>&nbsp;Activity log</a>
                                         <div class="dropdown-divider"></div><a class="dropdown-item" href="#"><i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>&nbsp;Logout</a>
                                     </div>
@@ -147,8 +151,8 @@
                                             </select>&nbsp;</label></div>
                                 </div>
                                 <div class="col-md-6">
-                                <div class="text-md-right dataTables_filter" id="dataTable_filter"><label><input type="search" class="form-control form-control-sm" aria-controls="dataTable" placeholder="Ingrese codigo"><button class="btn btn-primary py-0" type="button" onclick="add()"><i class="fas fa-search"></i></button></div>
-                            </div>
+                                    <div class="text-md-right dataTables_filter" id="dataTable_filter"><label><input type="search" class="form-control form-control-sm" aria-controls="dataTable" placeholder="Search"></label></div>
+                                </div>
                             </div>
                             <div class="table-responsive table mt-2" id="dataTable" role="grid" aria-describedby="dataTable_info">
                                 <table class="table my-0" id="dataTable">
@@ -276,9 +280,9 @@
                     </div>
                 </div>
             </div>
-            <footer class="bg-white sticky-footer">
+            <footer class="bg-white sticky-footer" style="background: url(&quot;assets/img/logos/719982.jpg&quot;), #ffffff;">
                 <div class="container my-auto">
-                    <div class="text-center my-auto copyright"><span>Copyright © Brand 2023</span></div>
+                    <div class="text-center my-auto copyright"><span style="color: rgb(255,255,255);font-family: 'Autour One', cursive;font-size: 14;">Copyright © Nymeria 2023</span></div>
                 </div>
             </footer>
         </div><a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a>
@@ -289,7 +293,6 @@
     <script src="assets/js/bs-init.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.js"></script>
     <script src="assets/js/theme.js"></script>
-    <script type="text/javascript" src="database.js" ></script>
 </body>
 
 </html>
