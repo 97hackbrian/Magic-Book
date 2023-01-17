@@ -27,11 +27,16 @@ function add(){
     var active =dataBase.result;
     var data = active.transaction(["items"],"readwrite");
     var object = data.objectStore("items")
+    if(document.getElementById("ingresarCode").value=="" || document.getElementById("ingresarname").value=="" || document.getElementById("ingresarprecio").value==""){
+    alert("¡ingrese todos los campos por favor!");
+    }
+    else{
     var request = object.put({
         code: document.getElementById("ingresarCode").value,
         nombre: document.getElementById("ingresarname").value,
         precio: document.getElementById("ingresarprecio").value
     });
+    }
     request.onerror=function(e){
         alert(request.error.name+ '\n\n'+request.error.message);
     }
