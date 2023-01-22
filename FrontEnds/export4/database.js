@@ -346,8 +346,7 @@ vec1();
         	aux3=vector[aux1].precio;
 
         	}
-        	//console.log(vector[ind].code);
-        	
+        	//console.log(vector[ind].code);        	
         	
         }
         
