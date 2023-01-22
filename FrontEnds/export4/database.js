@@ -2,6 +2,7 @@ var indexedDB = window.indexedDB || window.mozIndexedDB || window.webkitIndexedD
 var dataBase=null;
 var timeout;
 var ide;
+var vector=new Array;
 
 function startDB(){
     dataBase = indexedDB.open("object",1);
@@ -56,8 +57,6 @@ function add(){
     data.onerror=function(e){
         alert("error"+request.error.name+ '\n\n'+request.error.message);
     }
-    
-
     
 }
 
@@ -149,6 +148,10 @@ function loadAll(){
         }
         
         elements.push(result.value);
+        
+//        vector.push(elements);
+	vector.push(result.value);
+        
         result.continue();
     };
     data.oncomplete=function(){
@@ -234,3 +237,207 @@ function loadAll2(){
         document.querySelector("#dataTable2").innerHTML=outerHMTL;       
     }
 }
+
+
+function add2(){
+//	count();
+suma=0;
+    var active =dataBase.result;
+    var data = active.transaction(["items2"],"readwrite");
+    var object = data.objectStore("items2")
+    if(document.getElementById("ScanCode").value==""){
+    alert("¡Escanear el código o escribirlo por favor!");
+    }
+    else{
+    data.oncomplete=function(e){
+//    	loadAll();
+        //alert("Guardado exitosamente el C : \n"+" Código: "+document.getElementById("ingresarCode").value+" \n Nombre: "+document.getElementById("ingresarname").value+" \n Precio: "+document.getElementById("ingresarprecio").value);
+        console.log("guardado"+document.getElementById("ScanCode").value);
+        loadVenta();
+    }
+    var request = object.put({
+        code: document.getElementById("ScanCode").value
+    });
+    
+        
+    }
+    data.onerror=function(e){
+        alert("error code DB"+request.error.name+ '\n\n'+request.error.message);
+    }
+    
+}
+var dataBase2 = indexedDB.open("object",1);
+
+function vec1(){
+    var active = dataBase2.result;
+    var data = active.transaction(["items"],"readonly");
+    var object = data.objectStore("items")
+    var elementsx=[];
+object.openCursor().onsuccess=function(e){
+        var result2 =e.target.result;
+        if(result2==null){
+            return;
+        }
+        
+        elementsx.push(result2.value);
+        vector.push(result2.value);
+        result2.continue();
+    };
+    data.oncomplete=function(){
+        for(var key in elementsx){
+       // console.log("nombre: "+elementsx[key].code);
+        }
+        }
+        
+/*        
+        for(var key in vector){
+        console.log("nombre: "+vector[key].nombre);
+        }*/
+}
+
+
+var suma;
+
+function loadVenta(){
+
+vec1();
+    var aux1;
+    var aux2;
+    var aux3;
+    suma=0;
+
+    var active =dataBase.result;
+    var data = active.transaction(["items2"],"readonly");
+    var object = data.objectStore("items2")
+    var elements2=[];
+
+    object.openCursor().onsuccess=function(e){
+        var result =e.target.result;
+        if(result==null){
+            return;
+        }
+        
+        elements2.push(result.value);
+        result.continue();
+    };
+    data.oncomplete=function(){
+    
+    for(var key in vector){
+        //console.log("nombre: "+vector[key].nombre);
+        
+        }
+    
+        var outerHMTL='';
+        var out2='';
+        for(var key in elements2){
+        //	ide=elements[key].id+2;
+        
+        }
+        
+        
+        
+        //elements.reverse()
+        for(var key in elements2){
+        for(var ind in vector){
+        	if(elements2[key].code == vector[ind].code){
+        	aux1=ind;
+        	console.log("-<" +vector[aux1].nombre);
+        	aux2=vector[aux1].nombre;
+        	aux3=vector[aux1].precio;
+
+        	}
+        	//console.log(vector[ind].code);
+        	
+        	
+        }
+        
+        
+        
+                	if (aux2==undefined||aux3==undefined){
+        	aux2="nombre no registrado";
+        	aux3="precio no registrado";
+        	}
+        	else{
+        	        	suma=parseInt(suma)+parseInt(aux3);
+            outerHMTL+='\n\
+            <div class="form-row">\n\
+            <div class="col">\n\
+            <div class="form-group"><label for="username"><strong>Precio</strong><br></label><strong class="form-control" id="PrecioMostrar">\n\
+            '+aux3+'</strong>\n\
+            </div>\n\
+            </div>\n\
+            <div class="col">\n\
+            <div class="form-group"><label for="username"><strong>Nombre</strong><br></label><strong class="form-control" id="NombreMostrar">\n\
+            '+aux2+'</strong>\n\
+            </div>\n\
+            </div>\n\
+            <div class="col">\n\
+            <div class="form-group"><label for="username"><strong>Código</strong><br></label><strong class="form-control" id="CódigoMostrar">\n\
+            '+elements2[key].code+'</strong>\n\
+            </div>\n\
+            </div>\n\
+            </div>';
+            
+            }
+          
+        }
+        out2+='Bs.'+suma;
+        elements2=[];
+        document.querySelector("#ventas").innerHTML=outerHMTL;
+        document.querySelector("#total").innerHTML=out2;
+    }
+
+}
+
+
+
+function Vender(){
+suma=0;
+var req = indexedDB.deleteDatabase("object2");
+
+location.reload();
+startDB2();
+loadVenta();
+
+
+req.onsuccess = function () {
+    console.log("Deleted database successfully");
+};
+req.onerror = function () {
+    console.log("Couldn't delete database");
+};
+
+}
+
+
+
+function startDB2(){
+	//console.log(<?php echo $variable1; ?>);
+    dataBase = indexedDB.open("object2",1);
+    //indexedDB.createTable("djs");
+    dataBase.onupgradeneeded=function(e){
+        alert("Vendido!");
+        var active =dataBase.result;
+        var Option ={
+            keyPath:'id',
+            autoIncrement: true
+        };
+
+        var object = active.createObjectStore("items2",Option);
+        object.createIndex('code','dni',{unique:false});
+        object.createIndex('nombre','name',{unique:false});
+        object.createIndex('precio','dni',{unique:false});
+    }
+    dataBase.onsuccess=function(e){
+
+        loadVenta();
+        //count();
+        
+setTimeout(() => {
+  console.log("Base de datos correctamente leida")
+}, 20);
+    }
+
+}
+
+

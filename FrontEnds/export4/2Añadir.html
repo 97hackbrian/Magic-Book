@@ -1,3 +1,8 @@
+<?php
+$vec=[];
+
+?>
+
 <!DOCTYPE html>
 <html>
 
@@ -20,6 +25,7 @@
 </head>
 
 <body id="page-top" onload="startDB();">
+
     <div id="wrapper">
         <nav class="navbar navbar-dark align-items-start sidebar sidebar-dark accordion bg-gradient-primary p-0" style="background: url(&quot;assets/img/logos/890403.jpg&quot;);">
             <div class="container-fluid d-flex flex-column p-0"><a class="navbar-brand d-flex justify-content-center align-items-center sidebar-brand m-0" href="#">
@@ -42,6 +48,8 @@
                 <nav class="navbar navbar-light navbar-expand bg-white shadow mb-4 topbar static-top" style="background: url(&quot;assets/img/logos/719982.jpg&quot;);">
                     <div class="container-fluid"><button class="btn btn-link d-md-none rounded-circle mr-3" id="sidebarToggleTop" type="button"><i class="fas fa-bars"></i></button>
                         <form class="form-inline d-none d-sm-inline-block mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+
+			
 
                                 <div class="input-group-append">
                             </div>
@@ -144,9 +152,14 @@
                     <div class="btn-toolbar">
                         
                     </div>
+                    
+                    
                     <div class="card shadow">
                         <div class="card-header py-3">
-                            <div class="text-primary font-weight-bold">Datos del producto para borrar ----> <input type="search" id="eliminado" class="text-primary m-0 font-weight" aria-controls="dataTable" placeholder="Ingresar ITEM para borrar"></div>
+                        <div class="container-fluid">
+                    <h3 class="text-dark mb-4" style="font-family: Aclonica, sans-serif;">Añadir/Eliminar y stock</h3>
+                    </div>
+                            <div class="text-primary font-weight-bold">Datos del producto para borrar ---->  <input type="search" id="eliminado" class="text-primary m-0 font-weight" aria-controls="dataTable" placeholder="Ingresar ITEM para borrar"></div>
                
                             <div class="text-primary font-weight-bold">Datos del producto para agregar ---->
 <input type="search" id="ingresarCode" class="text-primary m-0 font-weight" aria-controls="dataTable" placeholder="Ingresar código"><input type="search" id="ingresarname" class="text-primary m-0 font-weight" aria-controls="dataTable" placeholder="Ingresar nombre del producto"><input type="search" id="ingresarprecio" class="text-primary m-0 font-weight" aria-controls="dataTable" placeholder="Ingresar el precio"></div>
@@ -197,16 +210,13 @@
                             </div>
                             <div class="row">
                                 <div class="col-md-6 align-self-center">
-                                    <p id="dataTable_info" class="dataTables_info" role="status" aria-live="polite">Showing 1 to 10 of 27</p>
+                                    
                                 </div>
                                 <div class="col-md-6">
                                     <nav class="d-lg-flex justify-content-lg-end dataTables_paginate paging_simple_numbers">
                                         <ul class="pagination">
-                                            <li class="page-item disabled"><a class="page-link" href="#" aria-label="Previous"><span aria-hidden="true">«</span></a></li>
-                                            <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                                            <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                            <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                            <li class="page-item"><a class="page-link" href="#" aria-label="Next"><span aria-hidden="true">»</span></a></li>
+                                            
+                                            
                                         </ul>
                                     </nav>
                                 </div>
@@ -228,6 +238,8 @@
     <script src="assets/js/bs-init.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.js"></script>
     <script src="assets/js/theme.js"></script>
+    
+       «<! ––«  <a href="3ventas.html?variable1=<?php echo $variable1 ?>&variable2=<?php echo $variable2 ?>Ver la otra Pagina</a> «––>«
 </body>
 
 </html>

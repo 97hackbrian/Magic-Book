@@ -1,3 +1,19 @@
+<?php
+$cantidad=10;
+//Obterner las variable
+
+$variable1=($_GET['variable1']);
+
+$variable2=($_GET['variable2']);
+
+// Mostar las variables
+
+echo "$variable1";
+
+echo "$variable2";
+?>
+
+
 <!DOCTYPE html>
 <html>
 
@@ -16,9 +32,10 @@
     <link rel="stylesheet" href="assets/fonts/fontawesome-all.min.css">
     <link rel="stylesheet" href="assets/fonts/font-awesome.min.css">
     <link rel="stylesheet" href="assets/fonts/fontawesome5-overrides.min.css">
+    <script type="text/javascript" src="database.js" ></script>
 </head>
 
-<body id="page-top">
+<body id="page-top" onload="startDB2();">
     <div id="wrapper">
         <nav class="navbar navbar-dark align-items-start sidebar sidebar-dark accordion bg-gradient-primary p-0" style="background: url(&quot;assets/img/logos/890403.jpg&quot;);">
             <div class="container-fluid d-flex flex-column p-0"><a class="navbar-brand d-flex justify-content-center align-items-center sidebar-brand m-0" href="#">
@@ -140,7 +157,14 @@
                         <div class="col-lg-4">
                             <div class="card mb-3">
                                 <div class="card-body text-center shadow"><img class="rounded-circle mb-3 mt-4" src="assets/img/logos/Loto%20sagrado%20en%20el%20agua_xtrafondos.com.jpg" width="160" height="160">
-                                    <div class="mb-3"><button class="btn btn-primary btn-sm" type="button" style="background: url(&quot;assets/img/logos/5447-estrellas.jpg&quot;);"><strong>Escanear Código de Barras</strong></button></div>
+                                	
+                                <input type="search" id="ScanCode" class="text-primary m-0 font-weight" aria-controls="dataTable" placeholder="Escanear Código de barras"></input>
+                                <div> <strong> ||</strong>
+                                <strong> ||</strong>
+                                <strong> ||</strong> </div>
+                                                                <div> <strong> ||</strong>
+                                <strong> ||</strong> </div>
+                                    <div class="mb-3"><button class="btn btn-primary btn-sm-bold" type="button" style="background: #9B842C;", onclick="add2()"><strong>Añadir código</strong></button></div>
                                 </div>
                             </div>
                         </div>
@@ -182,22 +206,42 @@
                                             <p class="text-primary m-0 font-weight-bold">Total de Productos</p>
                                         </div>
                                         <div class="card-body">
-                                            <form>
+                                            <form id="ventas">
+                                            
+                                            
                                                 <div class="form-row">
                                                     <div class="col">
-                                                        <div class="form-group"><label for="username"><strong>Precio</strong><br></label><input class="form-control" type="text" id="username" placeholder="user.name" name="username"></div>
+                                                        <div class="form-group"><label for="username"><strong>Precio</strong><br></label><strong class="form-control" id="PrecioMostrar">
+                                                        </strong>
+                                                        </div>
                                                     </div>
                                                     <div class="col">
-                                                        <div class="form-group"><label for="email"><strong>Código</strong><br></label><input class="form-control" type="email" id="email" placeholder="user@example.com" name="email"></div>
+                                                        <div class="form-group"><label for="username"><strong>Nombre</strong><br></label><strong class="form-control" id="NombreMostrar">
+                                                        </strong>
+                                                        </div>
                                                     </div>
-                                                </div>
-                                                <div class="form-row">
+                                                    
                                                     <div class="col">
-                                                        <div class="form-group"><label for="first_name"><strong>Total</strong><br></label><input class="form-control" type="text" id="first_name" placeholder="John" name="first_name"></div>
+                                                        <div class="form-group"><label for="username"><strong>Código</strong><br></label><strong class="form-control" id="CódigoMostrar">
+                                                        </strong>
+                                                        </div>
                                                     </div>
                                                 </div>
-                                                <div class="form-group"><button class="btn btn-primary btn-sm" type="submit" style="background: url(&quot;assets/img/logos/5447-estrellas.jpg&quot;);"><strong>Vender Producto</strong></button></div>
                                             </form>
+                                                <div class="form-row">
+                                                    <div class="col">
+                                                    
+                                                        <div class="form-group" id ="tot"><label for="username"><strong>Total</strong><br></label><strong class="form-control" id="TotalMostrar"><form id ="total"></form>
+                                                        </strong>
+                                                        </div>
+                                                    
+                                                    </div>
+                                                </div>
+                                                
+                                            
+                                            
+                                            
+                                            <div class="form-group"><button class="btn btn-primary btn-sm" type="submit" style="background: #008f39;", onclick="Vender()"><strong>Vender Productos</strong></button></div>
                                         </div>
                                     </div>
                                 </div>
