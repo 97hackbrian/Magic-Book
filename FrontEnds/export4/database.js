@@ -512,9 +512,9 @@ setTimeout(() => {
 
 var indexedDB2 = window.indexedDB || window.mozIndexedDB || window.webkitIndexedDB || window.msIndexedDB;
 var dataBaseC=null;
-
+var dataBaseC2 = indexedDB2.open("Reporte",1);
 function startDBC(){
-    dataBaseC = indexedDB2.open("Reporte",1);
+    dataBaseC = dataBaseC2
     //indexedDB.createTable("djs");
     dataBaseC.onupgradeneeded=function(e){
         alert("creado");
@@ -566,11 +566,11 @@ function addC(){
     }
     
 
-    var dataBaseC2 = indexedDB2.open("Reporte",1);
+    
     function loadAllC(){
         startDBC();
-        
-        var active =dataBaseC2.result;
+        var dataBaseC3=indexedDB2.open("Reporte",1)
+        var active =dataBaseC.result;
         var data = active.transaction(["items"],"readonly");
         var object = data.objectStore("items")
         var elements=[];
