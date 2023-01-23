@@ -334,30 +334,29 @@ vec1();
         
         }
         
-        
+        var auxf=0;
         
         //elements.reverse()
         for(var key in elements2){
+            auxf=0;
         for(var ind in vector){
         	if(elements2[key].code == vector[ind].code){
+
+            
+                auxf++;
         	aux1=ind;
         	console.log("-<" +vector[aux1].nombre);
         	aux2=vector[aux1].nombre;
         	aux3=vector[aux1].precio;
 
-        	}
-        	//console.log(vector[ind].code);        	
-        	
-        }
-        
-        
-        
-                	if (aux2==undefined||aux3==undefined){
-        	aux2="nombre no registrado";
-        	aux3="precio no registrado";
-        	}
-        	else{
-        	        	suma=parseInt(suma)+parseInt(aux3);
+            if (aux2==undefined||aux3==undefined){
+                aux2="nombre no registrado";
+                aux3="precio no registrado";
+                }
+            if(auxf<=1){
+
+
+            suma=parseInt(suma)+parseInt(aux3);
             outerHMTL+='\n\
             <div class="form-row">\n\
             <div class="col">\n\
@@ -376,8 +375,75 @@ vec1();
             </div>\n\
             </div>\n\
             </div>';
-            
+        	}
+            //break;
+
+        }
+
+        /*
+            else{
+                auxf++;
+                if(auxf<=1){
+                aux2=undefined;
+                aux3=undefined;
+                if (aux2==undefined||aux3==undefined){
+                    aux2="nombre no registrado";
+                    aux3="precio no registrado";
+                    }
+
+                    suma=parseInt(suma)+parseInt(aux3);
+                    outerHMTL+='\n\
+                    <div class="form-row">\n\
+                    <div class="col">\n\
+                    <div class="form-group"><label for="username"><strong>Precio</strong><br></label><strong class="form-control" id="PrecioMostrar">\n\
+                    '+aux3+'</strong>\n\
+                    </div>\n\
+                    </div>\n\
+                    <div class="col">\n\
+                    <div class="form-group"><label for="username"><strong>Nombre</strong><br></label><strong class="form-control" id="NombreMostrar">\n\
+                    '+aux2+'</strong>\n\
+                    </div>\n\
+                    </div>\n\
+                    <div class="col">\n\
+                    <div class="form-group"><label for="username"><strong>Código</strong><br></label><strong class="form-control" id="CódigoMostrar">\n\
+                    '+elements2[key].code+'</strong>\n\
+                    </div>\n\
+                    </div>\n\
+                    </div>';
+                    
             }
+        }
+        */
+        	//console.log(vector[ind].code);        	
+        	
+        }
+        
+        if(auxf==0)
+        {
+            aux2="Item no registrado";
+            aux3="Item no registrado";
+            outerHMTL+='\n\
+            <div class="form-row">\n\
+            <div class="col">\n\
+            <div class="form-group"><label for="username"><strong>Precio</strong><br></label><strong class="form-control" id="PrecioMostrar">\n\
+            '+aux3+'</strong>\n\
+            </div>\n\
+            </div>\n\
+            <div class="col">\n\
+            <div class="form-group"><label for="username"><strong>Nombre</strong><br></label><strong class="form-control" id="NombreMostrar">\n\
+            '+aux2+'</strong>\n\
+            </div>\n\
+            </div>\n\
+            <div class="col">\n\
+            <div class="form-group"><label for="username"><strong>Código</strong><br></label><strong class="form-control" id="CódigoMostrar">\n\
+            '+elements2[key].code+'</strong>\n\
+            </div>\n\
+            </div>\n\
+            </div>';
+
+        }
+        
+                	
           
         }
         out2+='Bs.'+suma;
