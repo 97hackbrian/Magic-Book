@@ -565,3 +565,45 @@ function addC(){
         
     }
     
+
+    var dataBaseC2 = indexedDB2.open("Reporte",1);
+    function loadAllC(){
+        startDBC();
+        
+        var active =dataBaseC2.result;
+        var data = active.transaction(["items"],"readonly");
+        var object = data.objectStore("items")
+        var elements=[];
+        var dia=0;
+    
+        object.openCursor().onsuccess=function(e){
+            var result =e.target.result;
+            if(result==null){
+                return;
+            }
+            
+            elements.push(result.value);
+            
+    //        vector.push(elements);
+        vector.push(result.value);
+            
+            result.continue();
+        };
+        data.oncomplete=function(){
+            var outerHMTL='';
+            for(var key in elements){
+            //	ide=elements[key].id+2;
+                dia=parseInt(elements[key].day)+parseInt(dia);
+
+            }
+            console.log(dia);
+            
+            
+            
+                outerHMTL+=dia;
+              
+            
+            elements=[];
+            document.querySelector("#diar").innerHTML=outerHMTL;       
+        }
+    }
