@@ -2,7 +2,7 @@ var indexedDB2 = window.indexedDB || window.mozIndexedDB || window.webkitIndexed
 var dataBaseC=null;
 
 function startDBC(){
-    dataBaseC = indexedDB.open("Reporte",1);
+    dataBaseC = indexedDB2.open("Reporte",1);
     //indexedDB.createTable("djs");
     dataBaseC.onupgradeneeded=function(e){
         alert("creado");
@@ -13,13 +13,13 @@ function startDBC(){
         };
 
         var object = active.createObjectStore("items",Option);
-        object.createIndex('code','dni',{unique:false});
-        object.createIndex('nombre','name',{unique:false});
-        object.createIndex('precio','dni',{unique:false});
+        object.createIndex('diario','d',{unique:false});
+        object.createIndex('semanal','s',{unique:false});
+        object.createIndex('mensuales','m',{unique:false});
     }
     dataBaseC.onsuccess=function(e){
 
-        loadAll();
+        loadC();
         //count();
         
 setTimeout(() => {
@@ -28,3 +28,27 @@ setTimeout(() => {
     }
 
 }
+
+function addC(){
+    //	count();
+        var active =dataBaseC.result;
+        var data = active.transaction(["items"],"readwrite");
+        var object = data.objectStore("items")
+ 
+ 
+        data.oncomplete=function(e){
+    //    	loadAll();
+            alert("Guardado exitosamente el pago");
+            //loadAll();
+        }
+        var request = object.put({
+            day: document.getElementById("ingresarCode").value
+        });
+        
+            
+        
+        data.onerror=function(e){
+            alert("error"+request.error.name+ '\n\n'+request.error.message);
+        }
+        
+    }
