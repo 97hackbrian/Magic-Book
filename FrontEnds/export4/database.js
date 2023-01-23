@@ -457,6 +457,7 @@ vec1();
 
 
 function Vender(){
+    alert("Vendido! "+suma+"Bs.");
 suma=0;
 var req = indexedDB.deleteDatabase("object2");
 
@@ -482,7 +483,7 @@ function startDB2(){
     dataBase = indexedDB.open("object2",1);
     //indexedDB.createTable("djs");
     dataBase.onupgradeneeded=function(e){
-        alert("Vendido!");
+        //alert("Vendido! "+suma+"Bs.");
         var active =dataBase.result;
         var Option ={
             keyPath:'id',
