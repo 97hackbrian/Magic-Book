@@ -266,7 +266,7 @@ suma=0;
     }
     
 }
-var dataBase2 = indexedDB.open("object",1);
+
 
 function vec1(){
     var active = dataBase2.result;
@@ -409,8 +409,9 @@ req.onerror = function () {
 }
 
 
-
+let dataBase2;
 function startDB2(){
+    dataBase2 = indexedDB.open("object",1);
 	//console.log(<?php echo $variable1; ?>);
     dataBase = indexedDB.open("object2",1);
     //indexedDB.createTable("djs");
