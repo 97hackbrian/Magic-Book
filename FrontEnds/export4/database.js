@@ -457,7 +457,10 @@ vec1();
 
 
 function Vender(){
-    addC();
+    //startDBC();
+    //dataBaseCx = indexedDB.open("Reporte",1);
+    addC(suma);
+    console.log("suma es   "+suma);
     alert("Vendido! "+suma+"Bs.");
 suma=0;
 var req = indexedDB.deleteDatabase("object2");
@@ -479,7 +482,7 @@ req.onerror = function () {
 
 let dataBase2;
 function startDB2(){
-    startDBC();
+    //startDBC();
     dataBase2 = indexedDB.open("object",1);
 	//console.log(<?php echo $variable1; ?>);
     dataBase = indexedDB.open("object2",1);
@@ -512,9 +515,10 @@ setTimeout(() => {
 
 var indexedDB2 = window.indexedDB || window.mozIndexedDB || window.webkitIndexedDB || window.msIndexedDB;
 var dataBaseC=null;
-var dataBaseC2 = indexedDB2.open("Reporte",1);
+var dataBaseCx=null;
+var activex=null;
 function startDBC(){
-    dataBaseC = dataBaseC2
+    dataBaseC = indexedDB2.open("Reporte",1);
     //indexedDB.createTable("djs");
     dataBaseC.onupgradeneeded=function(e){
         alert("creado");
@@ -523,14 +527,14 @@ function startDBC(){
             keyPath:'id',
             autoIncrement: true
         };
-
+       // activex=dataBaseC.result;
         var object = active.createObjectStore("items",Option);
         object.createIndex('diario','d',{unique:false});
         object.createIndex('semanal','s',{unique:false});
         object.createIndex('mensuales','m',{unique:false});
     }
     dataBaseC.onsuccess=function(e){
-
+        loadAllC();
         //loadC();
         //count();
         
@@ -541,8 +545,30 @@ setTimeout(() => {
 
 }
 
-function addC(){
+function addC(sumaX){
     //	count();
+       // var dataBaseCx2 = indexedDB2.open("Reporte",1);
+        
+       dataBaseC = indexedDB2.open("Reporte",1);
+       //indexedDB.createTable("djs");
+       dataBaseC.onupgradeneeded=function(e){
+           alert("creado");
+           var active =dataBaseC.result;
+           var Option ={
+               keyPath:'id',
+               autoIncrement: true
+           };
+           //activex=dataBaseC.result;
+           var object = active.createObjectStore("items",Option);
+           object.createIndex('diario','d',{unique:false});
+           object.createIndex('semanal','s',{unique:false});
+           object.createIndex('mensuales','m',{unique:false});
+       }
+       dataBaseC.onsuccess=function(e){
+           //loadAllC();
+           //loadC();
+           //count();
+           //dataBaseC = indexedDB2.open("Reporte",1);
         var active =dataBaseC.result;
         var data = active.transaction(["items"],"readwrite");
         var object = data.objectStore("items")
@@ -550,11 +576,11 @@ function addC(){
  
         data.oncomplete=function(e){
     //    	loadAll();
-            alert("Guardado exitosamente el pago");
+            console.log("Guardado exitosamente el pago  "+sumaX);
             //loadAll();
         }
         var request = object.put({
-            day: suma
+            day: sumaX
         });
         
             
@@ -564,12 +590,15 @@ function addC(){
         }
         
     }
+    }
     
 
     
     function loadAllC(){
-        startDBC();
-        var dataBaseC3=indexedDB2.open("Reporte",1)
+        var dataBasexx=dataBaseC;
+        //var dataBaseC2 = indexedDB2.open("Reporte",1);
+        var dataBasexx=indexedDB2.open("Reporte",1);
+
         var active =dataBaseC.result;
         var data = active.transaction(["items"],"readonly");
         var object = data.objectStore("items")
@@ -600,7 +629,7 @@ function addC(){
             
             
             
-                outerHMTL+=dia;
+                outerHMTL+=dia+" Bs.";
               
             
             elements=[];
