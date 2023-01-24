@@ -41,6 +41,11 @@ function add(){
     var active =dataBase.result;
     var data = active.transaction(["items"],"readwrite");
     var object = data.objectStore("items");
+    if(document.getElementById("ingresarCode").value==""||document.getElementById("ingresarcantidad").value==""){
+        alert("¡ingrese el código y datos para agregar, por favor!");
+    }
+    else{
+        
 
     var request = object.put({
         c: document.getElementById("ingresarCode").value,
@@ -48,7 +53,7 @@ function add(){
         ca: document.getElementById("ingresarcantidad").value,
         p: document.getElementById("ingresarprecio").value
     });
-
+        
 
     request.onerror = function (e) {			   
         var active= dataBase.result;
@@ -109,8 +114,8 @@ function add(){
           loadAll();
           
       };
-      
   }
+}
 
 
 
@@ -205,24 +210,31 @@ function remove(){
                 var data = active.transaction(["items"], "readwrite");
                 var object = data.objectStore("items");
                 
-                let dataTask = document.getElementById("eliminado").value;
+                let dataTask =document.getElementById("ingresarCode").value;
                 if(dataTask=="")
                 {
-                	alert("¡ingrese todos los campos para eliminar por favor!");
+                	alert("¡ingrese el código para eliminar por favor!");
                 }
                 else{
 //                var index = target.getAttribute('id');;
                 
-//                var index = object.index('code');
-                var request = object.delete(+document.getElementById("eliminado").value);
+                 index = object.index('code');
+                var request = index.get(document.getElementById("ingresarCode").value);
+                
+                request.onsuccess = function () {
+                    var result = request.result;
+                    object.delete(result.id);
+                };
+
                 request.onerror = function (e) {
                     alert(request.error.name + '\n\n' + request.error.message);
                 };
  
                 data.oncomplete = function (e) {
- 			document.getElementById("eliminado").value = '';
+ 			//document.getElementById("eliminado").value = '';
                         document.getElementById("ingresarCode").value = '';
 			document.getElementById("ingresarname").value = '';
+            document.getElementById("ingresarcantidad").value = '';
 			document.getElementById("ingresarprecio").value = '';
  
                     alert('ITEM '+dataTask+" eliminado correctamente");
@@ -304,11 +316,12 @@ function loadAll(){
         for(var key in elements){
             outerHMTL+='\n\
             <tr>\n\
-            	<td>'+elements[key].id + '</td>\n\
+            	<td class="text-center">'+elements[key].id + '</td>\n\
                 <td>'+elements[key].c + '</td>\n\
                 <td>'+elements[key].n + '</td>\n\
-                <td>'+elements[key].ca + '</td>\n\
-                <td>'+elements[key].p + '</td>\n\
+                <td class="text-center">'+elements[key].ca + '</td>\n\
+                <td class="text-center">'+elements[key].p + '</td>\n\
+                <td class="text-center">'+elements[key].p*elements[key].ca + '</td>\n\
                 </tr>';
           
         }
