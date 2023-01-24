@@ -159,10 +159,11 @@ $vec=[];
                         <div class="container-fluid">
                     <h3 class="text-dark mb-4" style="font-family: Aclonica, sans-serif;">Añadir/Eliminar y stock</h3>
                     </div>
-                            <div class="text-primary font-weight-bold">Datos del producto para borrar ---->  <input type="search" id="eliminado" class="text-primary m-0 font-weight" aria-controls="dataTable" placeholder="Ingresar ITEM para borrar"></div>
+                            <div class="text-primary font-weight-bold">Para borrar -->  <input type="search" id="eliminado" class="text-primary m-0 font-weight" aria-controls="dataTable" placeholder="Ingresar ITEM para borrar"></div>
                
-                            <div class="text-primary font-weight-bold">Datos del producto para agregar ---->
-<input type="search" id="ingresarCode" class="text-primary m-0 font-weight" aria-controls="dataTable" placeholder="Ingresar código"><input type="search" id="ingresarname" class="text-primary m-0 font-weight" aria-controls="dataTable" placeholder="Ingresar nombre del producto"><input type="search" id="ingresarprecio" class="text-primary m-0 font-weight" aria-controls="dataTable" placeholder="Ingresar el precio"></div>
+                            <div class="text-primary font-weight-bold">Para agregar o renovar-->
+<input type="search" id="ingresarCode" class="text-primary m-0 font-weight" aria-controls="dataTable" placeholder="Ingresar código"><input type="search" id="ingresarname" class="text-primary m-0 font-weight" aria-controls="dataTable" placeholder="Ingresar nombre del producto"><input type="search" id="ingresarcantidad" class="text-primary m-0 font-weight" aria-controls="dataTable" placeholder="Ingresar la cantidad"><input type="search" id="ingresarprecio" class="text-primary m-0 font-weight" aria-controls="dataTable" placeholder="Ingresar el precio">
+</div>
                         	</div>                       
 
                         <div class="btn-group" role="group"><button class="btn btn-primary m-0 text-center font-weight-bold" type="button" style="color: rgb(255, 255, 255);background: url(&quot;assets/img/logos/5447-estrellas.jpg&quot;), rgb(78, 115, 223);" onclick="add()">Añadir al Registro</button></div>
@@ -184,7 +185,8 @@ $vec=[];
                                             <th class="text-left" style="text-align: center;">Item</th>
                                             <th class="text-left" style="text-align: center;">Código</th>
                                             <th class="text-left">Nombre del Producto</th>
-                                            <th class="text-left">Precio</th>
+                                            <th class="text-left">Cantidad</th>
+                                            <th class="text-left">Precio Unitario</th>
                                         </tr>
                                     </thead>
                                     <tbody id="dataTable2">
@@ -195,6 +197,7 @@ $vec=[];
                                             <td>Cargando</td>
                                             <td>Cargando.</td>
                                             <td>Cargando..</td>
+                                            <td>Cargando...</td>
                                         </tr>
                                         
                                     </tbody>

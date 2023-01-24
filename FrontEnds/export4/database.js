@@ -16,9 +16,10 @@ function startDB(){
         };
 
         var object = active.createObjectStore("items",Option);
-        object.createIndex('code','dni',{unique:false});
-        object.createIndex('nombre','name',{unique:false});
-        object.createIndex('precio','dni',{unique:false});
+        object.createIndex('code','c',{unique:true});
+        object.createIndex('nombre','n',{unique:false});
+        object.createIndex('cantidad','ca',{unique:false});
+        object.createIndex('precio','p',{unique:false});
     }
     dataBase.onsuccess=function(e){
 
@@ -32,33 +33,171 @@ setTimeout(() => {
 
 }
 
+
+
+//let auxFF;
+let auxFF=0;
 function add(){
-//	count();
     var active =dataBase.result;
     var data = active.transaction(["items"],"readwrite");
-    var object = data.objectStore("items")
-    if(document.getElementById("ingresarCode").value=="" || document.getElementById("ingresarname").value=="" || document.getElementById("ingresarprecio").value==""){
-    alert("¡ingrese todos los campos para añadir por favor!");
-    }
-    else{
-    data.oncomplete=function(e){
-//    	loadAll();
-        alert("Guardado exitosamente el Item : \n"+" Código: "+document.getElementById("ingresarCode").value+" \n Nombre: "+document.getElementById("ingresarname").value+" \n Precio: "+document.getElementById("ingresarprecio").value);
-        loadAll();
-    }
+    var object = data.objectStore("items");
+
     var request = object.put({
-        code: document.getElementById("ingresarCode").value,
-        nombre: document.getElementById("ingresarname").value,
-        precio: document.getElementById("ingresarprecio").value
+        c: document.getElementById("ingresarCode").value,
+        n: document.getElementById("ingresarname").value,
+        ca: document.getElementById("ingresarcantidad").value,
+        p: document.getElementById("ingresarprecio").value
     });
-    
-        
-    }
-    data.onerror=function(e){
-        alert("error"+request.error.name+ '\n\n'+request.error.message);
-    }
-    
-}
+
+
+    request.onerror = function (e) {			   
+        var active= dataBase.result;
+        var data= active.transaction(["items"], "readwrite");
+        var object= data.objectStore("items");
+         
+         var dni2=document.getElementById("ingresarCode").value;
+         var index= object.index("code");
+         var request = index.get(String(dni2));
+         
+         
+         
+         request.onsuccess = function(){
+          
+              /*var result = request.result;
+              console.log(result);
+              result.name = document.querySelector("#name").value;
+              result.surname = document.querySelector("#surname").value;*/
+              
+              object.openCursor().onsuccess = function (e){
+              
+               var result= e.target.result;
+               
+               if(result===null){return }
+               
+               console.log(result.value +" "+ dni2);
+               if ( result.value.c == dni2){
+                  console.log("result= "+ result.value.c + " dni2= "+ dni2);	 
+                  console.log("actualizando");
+                  result.value.ca = document.getElementById("ingresarcantidad").value;
+                  //result.value.p = document.getElementById("ingresarprecio").value;
+                  
+                  var objeto = result.value;
+                  result.update(objeto);
+                  console.log("objeto actualizado");
+                  //loadAll(); //funcion que muestra mis datos en una tabla 
+               }//cierre if
+                  result.continue();
+              } //cierre open cursor
+          
+          data.oncomplete = function (e) {
+      
+          //alert('Objeto agregado correctamente');
+          
+          loadAll();
+          
+      };
+              //console.log(objeto);
+               
+              
+             
+         } // cierre requeston success.
+         
+      }//cierre request on error
+      //alert("hola");
+      data.oncomplete = function (e) {
+         
+          loadAll();
+          
+      };
+      
+  }
+
+
+
+
+function agregar() {
+                var active = dataBase.result;
+                var data = active.transaction(["people"], "readwrite");
+                var object = data.objectStore("people");
+					
+					
+					
+                var request = object.put({
+                    dni: document.querySelector("#dni").value,
+                    name: document.querySelector("#name").value,
+                    surname: document.querySelector("#surname").value
+                });
+
+                request.onerror = function (e) {
+                   
+				   
+				  var active= dataBase.result;
+				  var data= active.transaction(["people"], "readwrite");
+				  var object= data.objectStore("people");
+				   
+				   var dni2=document.querySelector("#dni").value;
+				   var index= object.index("by_dni");
+				   var request = index.get(String(dni2));
+				   
+				   
+				   
+				   request.onsuccess = function(){
+					
+						/*var result = request.result;
+						console.log(result);
+						result.name = document.querySelector("#name").value;
+						result.surname = document.querySelector("#surname").value;*/
+						
+						object.openCursor().onsuccess = function (e){
+						
+						 var result= e.target.result;
+						 
+						 if(result===null){return }
+						 
+						 console.log(result.value +" "+ dni2);
+						 if ( result.value.dni == dni2){
+							console.log("result= "+ result.value.dni + " dni2= "+ dni2);	 
+							console.log("actualizando");
+							result.value.name = document.querySelector("#name").value;
+							result.value.surname = document.querySelector("#surname").value;
+							
+							var objeto = result.value;
+							result.update(objeto);
+							console.log("objeto actualizado");
+							//loadAll(); //funcion que muestra mis datos en una tabla 
+						 }//cierre if
+							result.continue();
+						} //cierre open cursor
+					
+					data.oncomplete = function (e) {
+                    document.querySelector("#dni").value = '';
+                    document.querySelector("#name").value = '';
+                    document.querySelector("#surname").value = '';
+                    //alert('Objeto agregado correctamente');
+					
+					loadAll();
+					
+                };
+						//console.log(objeto);
+						 
+						
+					   
+				   } // cierre requeston success.
+				   
+                }//cierre request on error
+				//alert("hola");
+                data.oncomplete = function (e) {
+                    document.querySelector("#dni").value = '';
+                    document.querySelector("#name").value = '';
+                    document.querySelector("#surname").value = '';
+                    alert('Objeto agregado correctamente');
+					
+					loadAll();
+					
+                };
+                
+            }
+
 
 function remove(){
 //count();
@@ -135,6 +274,7 @@ function count(){
 function loadAll(){
 	document.getElementById("ingresarCode").value = '';
 	document.getElementById("ingresarname").value = '';
+    document.getElementById("ingresarcantidad").value = '';
 	document.getElementById("ingresarprecio").value = '';
     var active =dataBase.result;
     var data = active.transaction(["items"],"readonly");
@@ -165,9 +305,10 @@ function loadAll(){
             outerHMTL+='\n\
             <tr>\n\
             	<td>'+elements[key].id + '</td>\n\
-                <td>'+elements[key].code + '</td>\n\
-                <td>'+elements[key].nombre + '</td>\n\
-                <td>'+elements[key].precio + '</td>\n\
+                <td>'+elements[key].c + '</td>\n\
+                <td>'+elements[key].n + '</td>\n\
+                <td>'+elements[key].ca + '</td>\n\
+                <td>'+elements[key].p + '</td>\n\
                 </tr>';
           
         }
