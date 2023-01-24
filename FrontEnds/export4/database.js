@@ -412,7 +412,7 @@ suma=0;
         loadVenta();
     }
     var request = object.put({
-        code: document.getElementById("ScanCode").value
+        c: document.getElementById("ScanCode").value
     });
     
         
@@ -496,14 +496,14 @@ vec1();
         for(var key in elements2){
             auxf=0;
         for(var ind in vector){
-        	if(elements2[key].code == vector[ind].code){
+        	if(elements2[key].c == vector[ind].c){
 
             
                 auxf++;
         	aux1=ind;
         	console.log("-<" +vector[aux1].nombre);
-        	aux2=vector[aux1].nombre;
-        	aux3=vector[aux1].precio;
+        	aux2=vector[aux1].n;
+        	aux3=vector[aux1].p;
 
             if (aux2==undefined||aux3==undefined){
                 aux2="nombre no registrado";
@@ -527,7 +527,7 @@ vec1();
             </div>\n\
             <div class="col">\n\
             <div class="form-group"><label for="username"><strong>Código</strong><br></label><strong class="form-control" id="CódigoMostrar">\n\
-            '+elements2[key].code+'</strong>\n\
+            '+elements2[key].c+'</strong>\n\
             </div>\n\
             </div>\n\
             </div>';
@@ -592,7 +592,7 @@ vec1();
             </div>\n\
             <div class="col">\n\
             <div class="form-group"><label for="username"><strong>Código</strong><br></label><strong class="form-control" id="CódigoMostrar">\n\
-            '+elements2[key].code+'</strong>\n\
+            '+elements2[key].c+'</strong>\n\
             </div>\n\
             </div>\n\
             </div>';
