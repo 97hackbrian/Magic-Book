@@ -52,8 +52,10 @@ function add(){
         n: document.getElementById("ingresarname").value,
         ca: document.getElementById("ingresarcantidad").value,
         p: document.getElementById("ingresarprecio").value
+        //alert("Guardado exitosamente el Item : \n" + " Código: "+document.getElementById("ingresarCode").value+" \n Nombre: "+document.getElementById("ingresarname").value+" \n Cantidad: "+document.getElementById("ingresarcantidad").value+" \n Precio: "+document.getElementById("ingresarprecio").value);
+        //alert("Guardado exitosamente el Item : \n"+" Código: "+document.getElementById("ingresarCode").value+" \n Nombre: "+document.getElementById("ingresarname").value+" \n Precio: "+document.getElementById("ingresarprecio").value);
     });
-        
+    alert("Guardado exitosamente el Item : \n" + " Código: "+document.getElementById("ingresarCode").value+" \n Nombre: "+document.getElementById("ingresarname").value+" \n Cantidad: "+document.getElementById("ingresarcantidad").value+" \n Precio: "+document.getElementById("ingresarprecio").value);
 
     request.onerror = function (e) {			   
         var active= dataBase.result;
@@ -237,7 +239,7 @@ function remove(){
             document.getElementById("ingresarcantidad").value = '';
 			document.getElementById("ingresarprecio").value = '';
  
-                    alert('ITEM '+dataTask+" eliminado correctamente");
+                    alert('ITEM con el código: '+dataTask+"\n"+" Nombre: "+request.result.n+"     eliminado correctamente.");
                     loadAll();
                 };
 
