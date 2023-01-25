@@ -3,6 +3,7 @@ var dataBase=null;
 var timeout;
 var ide;
 var vector=new Array;
+var vector2=new Array;
 
 function startDB(){
     dataBase = indexedDB.open("object",1);
@@ -466,7 +467,8 @@ vec1();
     var data = active.transaction(["items2"],"readonly");
     var object = data.objectStore("items2")
     var elements2=[];
-
+    //vector=[];////////////////
+    //vector2=[];
     object.openCursor().onsuccess=function(e){
         var result =e.target.result;
         if(result==null){
@@ -497,14 +499,12 @@ vec1();
             auxf=0;
         for(var ind in vector){
         	if(elements2[key].c == vector[ind].c){
-
-            
                 auxf++;
         	aux1=ind;
-        	console.log("-<" +vector[aux1].nombre);
+        	console.log("-<" +vector[aux1].n);
         	aux2=vector[aux1].n;
         	aux3=vector[aux1].p;
-
+            vector2[key]=vector[aux1].c;
             if (aux2==undefined||aux3==undefined){
                 aux2="nombre no registrado";
                 aux3="precio no registrado";
@@ -597,43 +597,46 @@ vec1();
             </div>\n\
             </div>';
 
-        }
-        
-                	
-          
+        }   	
         }
         out2+='Bs.'+suma;
         elements2=[];
         document.querySelector("#ventas").innerHTML=outerHMTL;
         document.querySelector("#total").innerHTML=out2;
     }
-
 }
 
 
-
+var activexxx=null;
 function Vender(){
     //startDBC();
     //dataBaseCx = indexedDB.open("Reporte",1);
     addC(suma);
     console.log("suma es   "+suma);
-    alert("Vendido! "+suma+"Bs.");
-suma=0;
-var req = indexedDB.deleteDatabase("object2");
-
-location.reload();
-startDB2();
-loadVenta();
+    vec1();
+    suma=0;
 
 
-req.onsuccess = function () {
-    console.log("Deleted database successfully");
-};
-req.onerror = function () {
-    console.log("Couldn't delete database");
-};
 
+    console.log("vec1");
+    console.log(vector);
+    console.log("vec2");
+    console.log(vector2);
+    
+    
+
+        alert("Vendido! "+suma+"Bs.");
+        var req = indexedDB.deleteDatabase("object2");
+        
+        location.reload();
+        startDB2();
+        loadVenta();
 }
+    
+    
+
+
+
 
 
 let dataBase2;
