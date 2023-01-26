@@ -493,7 +493,7 @@ object.openCursor().onsuccess=function(e){
 var suma;
 
 function loadVenta(){
-
+    document.getElementById("ScanCode").focus();
 vec1();
     var aux1;
     var aux2;
@@ -652,12 +652,12 @@ function Vender(){
     addC(suma);
     console.log("suma es   "+suma);
     vec1();
-    suma=0;
     console.log("vec1");
     console.log(vector);
     console.log("vec2");
     console.log(vector2);
         alert("Vendido! "+suma+"Bs.");
+        suma=0;
         var req = indexedDB.deleteDatabase("object2");
         document.getElementById("ScanCode").value = '';
         location.reload();
@@ -827,3 +827,17 @@ function addC(sumaX){
             document.querySelector("#diar").innerHTML=outerHMTL;       
         }
     }
+
+
+
+    const inputxx=document.getElementById("ScanCode");
+
+    if (inputxx) {
+
+    inputxx.addEventListener('keyup',(e)=>{
+        if(e.keyCode===13){
+            add2();
+        }
+    }
+    );
+}
