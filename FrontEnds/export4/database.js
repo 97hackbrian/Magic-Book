@@ -43,7 +43,7 @@ function add(){
     var data = active.transaction(["items"],"readwrite");
     var object = data.objectStore("items");
     if(document.getElementById("ingresarCode").value==""||document.getElementById("ingresarcantidad").value==""){
-        alert("¡ingrese el código y datos para agregar, por favor!");
+        alert("¡ingrese el código y/o datos para agregar, por favor!");
     }
     else{
         
@@ -209,7 +209,7 @@ function agregar() {
 
 function remove(){
 //count();
-		var active = dataBase.result;
+		        var active = dataBase.result;
                 var data = active.transaction(["items"], "readwrite");
                 var object = data.objectStore("items");
                 
@@ -221,7 +221,7 @@ function remove(){
                 else{
 //                var index = target.getAttribute('id');;
                 
-                 index = object.index('code');
+                var index = object.index('code');
                 var request = index.get(document.getElementById("ingresarCode").value);
                 
                 request.onsuccess = function () {
@@ -402,21 +402,58 @@ suma=0;
     var active =dataBase.result;
     var data = active.transaction(["items2"],"readwrite");
     var object = data.objectStore("items2")
+
+    var dataBaseV12 = indexedDB.open("object",1);
+    
+    
     if(document.getElementById("ScanCode").value==""){
     alert("¡Escanear el código o escribirlo por favor!");
     }
     else{
     data.oncomplete=function(e){
-//    	loadAll();
-        //alert("Guardado exitosamente el C : \n"+" Código: "+document.getElementById("ingresarCode").value+" \n Nombre: "+document.getElementById("ingresarname").value+" \n Precio: "+document.getElementById("ingresarprecio").value);
+
         console.log("guardado"+document.getElementById("ScanCode").value);
+        var dataBaseV12 = indexedDB.open("object",1);
+        dataBaseV12.onsuccess = function(event) {
+            console.log("aqui 2.0");
+            var active2 =event.target.result;
+            var data2 = active2.transaction(["items"],"readwrite");
+            var object2 = data2.objectStore("items")
+
+            var dni2=document.getElementById("ScanCode").value;
+            var index= object2.index("code");
+            var request = index.get(String(dni2));
+
+            request.onsuccess = function(){
+                object2.openCursor().onsuccess = function (e){
+                
+                 var result= e.target.result;
+                 
+                 if(result===null){return }
+                 
+                 console.log(result.value +" "+ dni2);
+                 if ( result.value.c == dni2){
+                    console.log("result= "+ result.value.c + " code= "+ dni2);	 
+                    console.log("actualizando la cantidad -1");
+                    result.value.ca = result.value.ca-1;
+                    //result.value.p = document.getElementById("ingresarprecio").value;
+                    
+                    var objeto = result.value;
+                    result.update(objeto);
+                    console.log("objeto actualizado");
+                    //loadAll(); //funcion que muestra mis datos en una tabla 
+                 }//cierre if
+                    result.continue();
+                } //cierre open cursor
+            
+           } 
+        }
+        //document.getElementById("ScanCode").value = '';
         loadVenta();
     }
     var request = object.put({
         c: document.getElementById("ScanCode").value
     });
-    
-        
     }
     data.onerror=function(e){
         alert("error code DB"+request.error.name+ '\n\n'+request.error.message);
@@ -603,6 +640,7 @@ vec1();
         elements2=[];
         document.querySelector("#ventas").innerHTML=outerHMTL;
         document.querySelector("#total").innerHTML=out2;
+        document.getElementById("ScanCode").value = '';
     }
 }
 
@@ -615,22 +653,16 @@ function Vender(){
     console.log("suma es   "+suma);
     vec1();
     suma=0;
-
-
-
     console.log("vec1");
     console.log(vector);
     console.log("vec2");
     console.log(vector2);
-    
-    
-
         alert("Vendido! "+suma+"Bs.");
         var req = indexedDB.deleteDatabase("object2");
-        
+        document.getElementById("ScanCode").value = '';
         location.reload();
-        startDB2();
-        loadVenta();
+        //startDB2();
+        //loadVenta();
 }
     
     
