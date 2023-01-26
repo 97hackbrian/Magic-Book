@@ -841,3 +841,23 @@ function addC(sumaX){
     }
     );
 }
+
+const inputxx2=document.getElementById("buscar");
+
+if (inputxx2) {
+
+inputxx2.addEventListener('keyup',(e)=>{
+    if(e.keyCode===13){
+        buscador();
+    }
+}
+);
+}
+
+
+
+
+function buscador(){
+    console.log("buscado");
+    window.find(document.getElementById("buscar").value);
+}
