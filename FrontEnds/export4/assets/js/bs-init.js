@@ -178,7 +178,7 @@ function CompareDate(){
 		var mes=f.getMonth()+1;
 		mes=mes.toString();
 
-		//if
+		//ifFVF
 		console.log("dia leido: "+dia);
 		console.log("mes leido: "+mesv);
 		console.log("dia actual: "+diav);
