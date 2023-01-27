@@ -29,7 +29,7 @@ function startDB(){
         
 setTimeout(() => {
   console.log("Base de datos correctamente leida")
-}, 2000);
+}, 200);
     }
 
 }
@@ -698,7 +698,7 @@ function startDB2(){
         
 setTimeout(() => {
   console.log("Base de datos correctamente leida")
-}, 20);
+}, 200);
     }
 
 }
@@ -731,7 +731,7 @@ function startDBC(){
         
 setTimeout(() => {
   console.log("Base de datos correctamente leida")
-}, 2000);
+}, 200);
     }
 
 }
