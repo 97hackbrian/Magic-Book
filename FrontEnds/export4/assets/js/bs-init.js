@@ -350,3 +350,4 @@ var chart=new Chart(miCanvas,{
     }
 	})
 }
+///////////////////
