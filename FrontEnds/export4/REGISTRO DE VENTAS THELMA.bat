@@ -1,0 +1,1 @@
+start chrome.exe file:///D:/Documentos/Magic-Book/FrontEnds/export4/1Inicio.html
