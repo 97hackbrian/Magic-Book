@@ -4,6 +4,7 @@ function validate(){
     if(password=="admin"){
         alert("ingreso correcto del administrador");
         window.open("4Balance.html","fullscreen", 'top=0,left=0,width='+(screen.availWidth)+',height ='+(screen.availHeight)+',fullscreen=yes,toolbar=0 ,location=0,directories=0,status=0,menubar=0,resiz able=0,scrolling=0,scrollbars=0');
+        close();
         return false;
     }
     else{
@@ -15,5 +16,6 @@ function validate(){
 function empleado(){
     alert("acceso empledo");
     window.open("3VentaX.html","fullscreen", 'top=0,left=0,width='+(screen.availWidth)+',height ='+(screen.availHeight)+',fullscreen=yes,toolbar=0 ,location=0,directories=0,status=0,menubar=0,resiz able=0,scrolling=0,scrollbars=0');
+    close();
     return false;
 }
