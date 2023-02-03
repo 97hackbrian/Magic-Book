@@ -1,4 +1,4 @@
-var attempt=4;
+//var attempt=4;
 function validate(){
     var password=document.getElementById("exampleInputPassword").value;
     if(password=="admin"){
@@ -7,7 +7,7 @@ function validate(){
         return false;
     }
     else{
-        attempt--;
+       // attempt--;
         alert("contraseña incorrecta");
         return false;
     }

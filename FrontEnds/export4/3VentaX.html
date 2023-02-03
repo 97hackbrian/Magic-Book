@@ -1,3 +1,19 @@
+<?php
+$cantidad=10;
+//Obterner las variable
+
+$variable1=($_GET['variable1']);
+
+$variable2=($_GET['variable2']);
+
+// Mostar las variables
+
+echo "$variable1";
+
+echo "$variable2";
+?>
+
+
 <!DOCTYPE html>
 <html>
 
@@ -16,9 +32,10 @@
     <link rel="stylesheet" href="assets/fonts/fontawesome-all.min.css">
     <link rel="stylesheet" href="assets/fonts/font-awesome.min.css">
     <link rel="stylesheet" href="assets/fonts/fontawesome5-overrides.min.css">
+    
 </head>
 
-<body id="page-top">
+<body id="page-top" onload="startDB2();">
     <div id="wrapper">
         <nav class="navbar navbar-dark align-items-start sidebar sidebar-dark accordion bg-gradient-primary p-0" style="background: url(&quot;assets/img/logos/890403.jpg&quot;);">
             <div class="container-fluid d-flex flex-column p-0"><a class="navbar-brand d-flex justify-content-center align-items-center sidebar-brand m-0" href="#">
@@ -28,10 +45,10 @@
                 <hr class="sidebar-divider my-0">
                 <ul class="navbar-nav text-light" id="accordionSidebar" style="font-family: 'Autour One', cursive;">
                     <li class="nav-item"><a class="nav-link text-monospace" href="1Inicio.html" style="color: rgb(255,255,255);"><i class="fa fa-linux" style="color: rgb(255,255,255);"></i><span class="text-justify text-white" style="font-family: Aclonica, sans-serif;font-size: 15;"><strong>Cierre de Sesión</strong><br></span></a></li>
-                    <li class="nav-item"><a class="nav-link" href="2Añadir.html" style="font-family: Aclonica, sans-serif;"><i class="fa fa-building" style="color: rgb(255,255,255);"></i><span style="font-family: Aclonica, sans-serif;font-size: 20;"><strong>Añadir y Eliminar</strong></span></a></li>
+                    <li class="nav-item"><a class="nav-link" href="Stock.html" style="font-family: Aclonica, sans-serif;"><i class="fa fa-building" style="color: rgb(255,255,255);"></i><span style="font-family: Aclonica, sans-serif;font-size: 20;"><strong>Stock</strong></span></a></li>
                     <li class="nav-item"><a class="nav-link active" href="3Venta.html" style="font-family: Aclonica, sans-serif;"><i class="fa fa-line-chart" style="color: rgb(255,255,255);"></i><span style="color: rgb(255,255,255);font-family: Aclonica, sans-serif;text-align: center;"><strong>Venta</strong></span></a></li>
-                    <li class="nav-item"><a class="nav-link text-nowrap" href="4Balance.html"><i class="fa fa-pie-chart" style="color: rgb(255,255,255);"></i><span style="color: rgb(255,255,255);font-family: Aclonica, sans-serif;"><strong>Balance</strong></span></a></li>
-                    <li class="nav-item"><a class="nav-link text-nowrap" href="5Stock.html"><i class="fa fa-heartbeat" style="color: rgb(255,255,255);"></i><span style="color: rgb(255,255,255);font-family: Aclonica, sans-serif;"><strong>Stock</strong></span></a></li>
+                    
+
                 </ul>
                 <div class="text-center d-none d-md-inline"></div>
             </div>
@@ -140,7 +157,14 @@
                         <div class="col-lg-4">
                             <div class="card mb-3">
                                 <div class="card-body text-center shadow"><img class="rounded-circle mb-3 mt-4" src="assets/img/logos/Loto%20sagrado%20en%20el%20agua_xtrafondos.com.jpg" width="160" height="160">
-                                    <div class="mb-3"><button class="btn btn-primary btn-sm" type="button" style="background: url(&quot;assets/img/logos/5447-estrellas.jpg&quot;);"><strong>Escanear Código de Barras</strong></button></div>
+                                	
+                                <input type="search" id="ScanCode" class="text-primary m-0 font-weight" aria-controls="dataTable" placeholder="Escanear Código de barras"></input>
+                                <div> <strong> ||</strong>
+                                <strong> ||</strong>
+                                <strong> ||</strong> </div>
+                                                                <div> <strong> ||</strong>
+                                <strong> ||</strong> </div>
+                                    <div class="mb-3"><button class="btn btn-primary btn-sm-bold" type="button" style="background: url(&quot;assets/img/logos/5447-estrellas.jpg&quot);", onclick="add2()"><strong>Añadir código</strong></button></div>
                                 </div>
                             </div>
                         </div>
@@ -182,22 +206,42 @@
                                             <p class="text-primary m-0 font-weight-bold">Total de Productos</p>
                                         </div>
                                         <div class="card-body">
-                                            <form>
+                                            <form id="ventas">
+                                            
+                                            
                                                 <div class="form-row">
                                                     <div class="col">
-                                                        <div class="form-group"><label for="username"><strong>Precio</strong><br></label><input class="form-control" type="text" id="username" placeholder="user.name" name="username"></div>
+                                                        <div class="form-group"><label for="username"><strong>Precio</strong><br></label><strong class="form-control" id="PrecioMostrar">
+                                                        </strong>
+                                                        </div>
                                                     </div>
                                                     <div class="col">
-                                                        <div class="form-group"><label for="email"><strong>Código</strong><br></label><input class="form-control" type="email" id="email" placeholder="user@example.com" name="email"></div>
+                                                        <div class="form-group"><label for="username"><strong>Nombre</strong><br></label><strong class="form-control" id="NombreMostrar">
+                                                        </strong>
+                                                        </div>
                                                     </div>
-                                                </div>
-                                                <div class="form-row">
+                                                    
                                                     <div class="col">
-                                                        <div class="form-group"><label for="first_name"><strong>Total</strong><br></label><input class="form-control" type="text" id="first_name" placeholder="John" name="first_name"></div>
+                                                        <div class="form-group"><label for="username"><strong>Código</strong><br></label><strong class="form-control" id="CódigoMostrar">
+                                                        </strong>
+                                                        </div>
                                                     </div>
                                                 </div>
-                                                <div class="form-group"><button class="btn btn-primary btn-sm" type="submit" style="background: url(&quot;assets/img/logos/5447-estrellas.jpg&quot;);"><strong>Vender Producto</strong></button></div>
                                             </form>
+                                                <div class="form-row">
+                                                    <div class="col">
+                                                    
+                                                        <div class="form-group" id ="tot"><label for="username"><strong>Total</strong><br></label><strong class="text-primary m-0 font-weight" id="TotalMostrar"><form id ="total"></form>
+                                                        </strong>
+                                                        </div>
+                                                    
+                                                    </div>
+                                                </div>
+                                                
+                                            
+                                            
+                                            
+                                            <div class="form-group"><button class="btn btn-primary btn-sm" type="submit" style="background:url(&quot;assets/img/logos/5447-estrellas.jpg&quot);", onclick="Vender()"><strong>Vender Productos</strong></button></div>
                                         </div>
                                     </div>
                                 </div>
@@ -219,6 +263,7 @@
     <script src="assets/js/bs-init.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.js"></script>
     <script src="assets/js/theme.js"></script>
+    <script type="text/javascript" src="database.js" ></script>
 </body>
 
 </html>

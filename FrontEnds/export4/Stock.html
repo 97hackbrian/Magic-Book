@@ -1,3 +1,8 @@
+<?php
+$vec=[];
+
+?>
+
 <!DOCTYPE html>
 <html>
 
@@ -18,7 +23,8 @@
     <link rel="stylesheet" href="assets/fonts/fontawesome5-overrides.min.css">
 </head>
 
-<body id="page-top">
+<body id="page-top" onload="startDB();">
+
     <div id="wrapper">
         <nav class="navbar navbar-dark align-items-start sidebar sidebar-dark accordion bg-gradient-primary p-0" style="background: url(&quot;assets/img/logos/890403.jpg&quot;);">
             <div class="container-fluid d-flex flex-column p-0"><a class="navbar-brand d-flex justify-content-center align-items-center sidebar-brand m-0" href="#">
@@ -28,29 +34,34 @@
                 <hr class="sidebar-divider my-0">
                 <ul class="navbar-nav text-light" id="accordionSidebar" style="font-family: 'Autour One', cursive;">
                     <li class="nav-item"><a class="nav-link text-monospace" href="1Inicio.html" style="color: rgb(255,255,255);"><i class="fa fa-linux" style="color: rgb(255,255,255);"></i><span class="text-justify text-white" style="font-family: Aclonica, sans-serif;font-size: 15;"><strong>Cierre de Sesión</strong><br></span></a></li>
-                    <li class="nav-item"><a class="nav-link" href="2Añadir.html" style="font-family: Aclonica, sans-serif;"><i class="fa fa-building" style="color: rgb(255,255,255);"></i><span style="font-family: Aclonica, sans-serif;font-size: 20;"><strong>Añadir y Eliminar</strong></span></a></li>
-                    <li class="nav-item"><a class="nav-link" href="3Venta.html" style="font-family: Aclonica, sans-serif;"><i class="fa fa-line-chart" style="color: rgb(255,255,255);"></i><span style="color: rgb(255,255,255);font-family: Aclonica, sans-serif;text-align: center;"><strong>Venta</strong></span></a></li>
-                    <li class="nav-item"><a class="nav-link text-nowrap" href="4Balance.html"><i class="fa fa-pie-chart" style="color: rgb(255,255,255);"></i><span style="color: rgb(255,255,255);font-family: Aclonica, sans-serif;"><strong>Balance</strong></span></a></li>
-                    <li class="nav-item"><a class="nav-link text-nowrap active" href="5Stock.html"><i class="fa fa-heartbeat" style="color: rgb(255,255,255);"></i><span style="color: rgb(255,255,255);font-family: Aclonica, sans-serif;"><strong>Stock</strong></span></a></li>
+                    <li class="nav-item"><a class="nav-link active" href="Stock.html" style="font-family: Aclonica, sans-serif;"><i class="fa fa-building" style="color: rgb(255,255,255);"></i><span style="font-family: Aclonica, sans-serif;font-size: 20;"><strong>Stock</strong></span></a></li>
+                    <li class="nav-item"><a class="nav-link" href="3VentaX.html" style="font-family: Aclonica, sans-serif;"><i class="fa fa-line-chart" style="color: rgb(255,255,255);"></i><span style="color: rgb(255,255,255);font-family: Aclonica, sans-serif;text-align: center;"><strong>Venta</strong></span></a></li>
+                    
+
                 </ul>
                 <div class="text-center d-none d-md-inline"></div>
             </div>
         </nav>
-        <div class="d-flex flex-column" id="content-wrapper">
-            <div id="content">
+        <div class="d-flex flex-column" id="content-wrapper" style="background: url(&quot;https://cdn.bootstrapstudio.io/placeholders/1400x800.png&quot;);">
+            <div id="content" style="background: url(&quot;assets/img/logos/719982.jpg&quot;);">
                 <nav class="navbar navbar-light navbar-expand bg-white shadow mb-4 topbar static-top" style="background: url(&quot;assets/img/logos/719982.jpg&quot;);">
                     <div class="container-fluid"><button class="btn btn-link d-md-none rounded-circle mr-3" id="sidebarToggleTop" type="button"><i class="fas fa-bars"></i></button>
                         <form class="form-inline d-none d-sm-inline-block mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
-                            <div class="input-group"><input class="bg-light form-control border-0 small" type="text" placeholder="Search for ...">
-                                <div class="input-group-append"><button class="btn btn-primary py-0" type="button"><i class="fas fa-search"></i></button></div>
+                            <div class="input-group"><input class="bg-light form-control border-0 small" type="text" placeholder="Buscar......" id="buscar">
+                                <button class="btn btn-primary " type="button" onclick="buscador();"><i class="fas fa-search"></i></button><div><input type="text" style="background: transparent;width: 1px"></div></input>
+                                
+                            </div>
+			
+
+                                <div class="input-group-append">
                             </div>
                         </form>
                         <ul class="navbar-nav flex-nowrap ml-auto">
                             <li class="nav-item dropdown d-sm-none no-arrow"><a class="dropdown-toggle nav-link" aria-expanded="false" data-toggle="dropdown" href="#"><i class="fas fa-search"></i></a>
                                 <div class="dropdown-menu dropdown-menu-right p-3 animated--grow-in" aria-labelledby="searchDropdown">
                                     <form class="form-inline mr-auto navbar-search w-100">
-                                        <div class="input-group"><input class="bg-light form-control border-0 small" type="text" placeholder="Search for ...">
-                                            <div class="input-group-append"><button class="btn btn-primary py-0" type="button"><i class="fas fa-search"></i></button></div>
+
+                                            <div class="input-group-append">
                                         </div>
                                     </form>
                                 </div>
@@ -135,96 +146,80 @@
                     </div>
                 </nav>
                 <div class="container-fluid">
-                    <h3 class="text-dark mb-4" style="font-family: Aclonica, sans-serif;">Productos en Almacenamiento</h3>
+                    <h3 class="text-dark mb-4"></h3>
+                    <div class="btn-toolbar">
+
+                        <div class="btn-group" role="group"></div>
+                    </div>
+                    <div class="btn-toolbar">
+                        
+                    </div>
+                    
+                    
                     <div class="card shadow">
                         <div class="card-header py-3">
-                            <p class="text-primary m-0 font-weight-bold">Búsqueda mediante código o por nombre</p>
-                        </div>
+                        <div class="container-fluid">
+                    <h3 class="text-dark mb-4" style="font-family: Aclonica, sans-serif;">STOCK</h3>
+                    </div>
+                            
+               
+                            
+                        	</div>                       
+
+                         
                         <div class="card-body">
                             <div class="row">
-                                <div class="col-md-6 text-nowrap"><button class="btn btn-primary" type="button" style="background: url(&quot;assets/img/logos/5447-estrellas.jpg&quot;);font-family: Nunito, sans-serif;"><strong>Código de barras</strong></button></div>
+                                <div class="col-md-6 text-nowrap">
+                                    <div id="dataTable_length" class="dataTables_length" aria-controls="dataTable"><label>-------------------------------------------------------------------------------------------------------------------------------------------------&nbsp;&nbsp;</label></div>
+                                </div>
                                 <div class="col-md-6">
-                                    <div class="text-md-right dataTables_filter" id="dataTable_filter"><label><input type="search" class="form-control form-control-sm" aria-controls="dataTable" placeholder="Search"></label></div>
+                                    <div class="text-md-right dataTables_filter" id="dataTable_filter"><label></label></div>
                                 </div>
                             </div>
                             <div class="table-responsive table mt-2" id="dataTable" role="grid" aria-describedby="dataTable_info">
                                 <table class="table my-0" id="dataTable">
                                     <thead>
                                         <tr>
-                                            <th>Código</th>
-                                            <th>Nombre</th>
-                                            <th>Precio</th>
+                                            <th class="text-center" style="text-align: center;">Item</th>
+                                            <th class="text-left" style="text-align: center;">Código</th>
+                                            <th class="text-left">Nombre del Producto</th>
+                                            <th class="text-center">Cantidad</th>
+                                            <th class="text-center">Precio Unitario</th>
+                                            <th class="text-center">Total</th>
                                         </tr>
                                     </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>Airi Satou</td>
-                                            <td>Accountant</td>
-                                            <td>Tokyo</td>
+                                    <tbody id="dataTable2">
+                                    
+                                    
+                                    	<tr>
+                                            
+                                            <td>Cargando</td>
+                                            <td>Cargando.</td>
+                                            <td>Cargando..</td>
+                                            <td>Cargando...</td>
+                                            <td>Cargando....</td>
                                         </tr>
-                                        <tr>
-                                            <td>Angelica Ramos</td>
-                                            <td>Chief Executive Officer(CEO)</td>
-                                            <td>London</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Ashton Cox</td>
-                                            <td>Junior Technical Author</td>
-                                            <td>San Francisco</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Bradley Greer</td>
-                                            <td>Software Engineer</td>
-                                            <td>London</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Brenden Wagner</td>
-                                            <td>Software Engineer</td>
-                                            <td>San Francisco</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Brielle Williamson</td>
-                                            <td>Integration Specialist</td>
-                                            <td>New York</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Bruno Nash<br></td>
-                                            <td>Software Engineer</td>
-                                            <td>London</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Caesar Vance</td>
-                                            <td>Pre-Sales Support</td>
-                                            <td>New York</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Cara Stevens</td>
-                                            <td>Sales Assistant</td>
-                                            <td>New York</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Cedric Kelly</td>
-                                            <td>Senior JavaScript Developer</td>
-                                            <td>Edinburgh</td>
-                                        </tr>
+                                        
                                     </tbody>
                                     <tfoot>
-                                        <tr></tr>
+                                        <tr>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>
                                     </tfoot>
                                 </table>
                             </div>
                             <div class="row">
                                 <div class="col-md-6 align-self-center">
-                                    <p id="dataTable_info" class="dataTables_info" role="status" aria-live="polite">Showing 1 to 10 of 27</p>
+                                    
                                 </div>
                                 <div class="col-md-6">
                                     <nav class="d-lg-flex justify-content-lg-end dataTables_paginate paging_simple_numbers">
                                         <ul class="pagination">
-                                            <li class="page-item disabled"><a class="page-link" href="#" aria-label="Previous"><span aria-hidden="true">«</span></a></li>
-                                            <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                                            <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                            <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                            <li class="page-item"><a class="page-link" href="#" aria-label="Next"><span aria-hidden="true">»</span></a></li>
+                                            
+                                            
                                         </ul>
                                     </nav>
                                 </div>
@@ -246,6 +241,9 @@
     <script src="assets/js/bs-init.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.js"></script>
     <script src="assets/js/theme.js"></script>
+    <script type="text/javascript" src="database.js" ></script>
+    
+       «<! ––«  <a href="3ventas.html?variable1=<?php echo $variable1 ?>&variable2=<?php echo $variable2 ?>Ver la otra Pagina</a> «––>«
 </body>
 
 </html>

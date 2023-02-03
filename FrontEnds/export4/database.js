@@ -287,10 +287,12 @@ function count(){
 
 
 function loadAll(){
+    if(document.getElementById("ingresarCode")){
 	document.getElementById("ingresarCode").value = '';
 	document.getElementById("ingresarname").value = '';
     document.getElementById("ingresarcantidad").value = '';
 	document.getElementById("ingresarprecio").value = '';
+    }
     var active =dataBase.result;
     var data = active.transaction(["items"],"readonly");
     var object = data.objectStore("items")
