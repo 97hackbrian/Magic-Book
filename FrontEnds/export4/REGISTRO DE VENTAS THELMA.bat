@@ -1,1 +1,1 @@
-start chrome.exe file:///D:/Documentos/Magic-Book/FrontEnds/export4/1Inicio.html
+start chrome.exe --kiosk file:///D:/Documentos/Magic-Book/FrontEnds/export4/1Inicio.html
