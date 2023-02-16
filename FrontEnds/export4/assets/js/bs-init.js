@@ -37,11 +37,13 @@ function createDate(){
         
 		addFecha();
 		CompareDate();
+		loadAllComplete();
+		//loadAllhist();
 		//count();
         
 setTimeout(() => {
   console.log("Base de datos correctamente leida")
-}, 2000);
+}, 200);
     }
 
 }
@@ -188,6 +190,7 @@ function CompareDate(){
 			console.log("dia coincide");
 			//LoadDate();
 			addFecha();
+			//location.reload();
 			
 		}
 		else{
@@ -195,10 +198,155 @@ function CompareDate(){
 			LoadDate();
 			addFecha();
 			indexedDB.deleteDatabase("Reporte");
+			//location.reload();
 		}
 		
 		elements=[];
 		      
 	}
 	
+}
+
+
+function loadAllComplete(){
+	
+	var dataDB2 = indexedDB.open("date",1);
+	dataDB2.onsuccess=function(e)
+	{
+	var active =dataDB2.result;
+	var data = active.transaction(["fecha"],"readonly");
+	var object = data.objectStore("fecha")
+	var elements=new Array;
+	var dia=0;
+
+	object.openCursor().onsuccess=function(e){
+		var result =e.target.result;
+		if(result==null){
+			return;
+		}
+		
+		elements.push(result.value);
+		
+//        vector.push(elements);
+	///vector.push(result.value);
+		
+		result.continue();
+	};
+	data.oncomplete=function(){
+		
+		var outerHMTL='';
+		var outerHMTL2='';
+		for(var key in elements){
+		//	ide=elements[key].id+2;
+		console.log(elements[key].vd+" <--");
+			if(elements[key].vd!=undefined){
+			dia=parseInt(elements[key].vd)+parseInt(dia);
+			}
+
+		}
+		dia=dia+ parseInt(document.querySelector("#diar").innerHTML)
+		console.log("todito "+dia);
+		console.log(elements);
+		
+			
+			outerHMTL+=dia+" Bs..";
+		  
+		
+		
+		document.querySelector("#todito").innerHTML=outerHMTL;       
+		var auxx=0;
+		for(var key in elements){
+			if(elements[key].vd!=undefined){
+
+				vectorito1[auxx]=elements[key-1].d+"/"+elements[key-1].m;
+				vectorito2[auxx]=elements[key-1].m;
+				vectorito3[auxx]=elements[key].vd;
+				auxx++;
+            outerHMTL2+='\n\
+            <tr>\n\
+            	<td class="text-center">'+elements[key-1].d + '</td>\n\
+                <td>'+elements[key-1].m + '</td>\n\
+                <td>'+elements[key].vd + '</td>\n\
+                </tr>';
+			}
+        }
+		document.querySelector("#dataTable2x").innerHTML=outerHMTL2;
+		elements=[];
+	}
+}
+
+}
+var vectorito1=[];
+var vectorito2=[];
+var vectorito3=[];
+
+function loadAllhist(){
+	document.getElementById("ingresarCode").value = '';
+	document.getElementById("ingresarname").value = '';
+    document.getElementById("ingresarcantidad").value = '';
+	document.getElementById("ingresarprecio").value = '';
+    var active =dataBase.result;
+    var data = active.transaction(["items"],"readonly");
+    var object = data.objectStore("items")
+    var elements=[];
+
+    object.openCursor().onsuccess=function(e){
+        var result =e.target.result;
+        if(result==null){
+            return;
+        }
+        
+        elements.push(result.value);
+        
+//        vector.push(elements);
+	vector.push(result.value);
+        
+        result.continue();
+    };
+    data.oncomplete=function(){
+        var outerHMTL='';
+        for(var key in elements){
+        //	ide=elements[key].id+2;
+        }
+        
+        elements.reverse()
+        for(var key in elements){
+            outerHMTL+='\n\
+            <tr>\n\
+            	<td class="text-center">'+elements[key].id + '</td>\n\
+                <td>'+elements[key].c + '</td>\n\
+                <td>'+elements[key].n + '</td>\n\
+                <td class="text-center">'+elements[key].ca + '</td>\n\
+                <td class="text-center">'+elements[key].p + '</td>\n\
+                <td class="text-center">'+elements[key].p*elements[key].ca + '</td>\n\
+                </tr>';
+          
+        }
+        elements=[];
+        document.querySelector("#dataTable2").innerHTML=outerHMTL;       
+    }
+}
+
+if(document.getElementById("Gsemana")){
+	if(vectorito1.length==5){
+		vectorito1=[];
+		vectorito2=[];
+		vectorito3=[];
+	}
+let miCanvas=document.getElementById("Gsemana").getContext("2d");
+var chart=new Chart(miCanvas,{
+    type:"bar",
+    data:{
+        labels:vectorito1,
+        datasets:[
+            {
+                label:"Ganancias diarias en la semana",  
+                fill  :true,  
+                data  :vectorito3,
+                backgroundColor  :  "rgb(105, 198, 220)",
+                borderColor  :  "rgb(1, 1, 1, 1)"
+            }
+        ]
+    }
+	})
 }
