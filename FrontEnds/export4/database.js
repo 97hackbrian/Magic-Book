@@ -9,7 +9,7 @@ function startDB(){
     dataBase = indexedDB.open("object",1);
     //indexedDB.createTable("djs");
     dataBase.onupgradeneeded=function(e){
-        alert("creado");
+        alert("Base de datos del stock creada!");
         var active =dataBase.result;
         var Option ={
             keyPath:'id',
@@ -661,6 +661,7 @@ function Vender(){
         var req = indexedDB.deleteDatabase("object2");
         document.getElementById("ScanCode").value = '';
         location.reload();
+        location.reload();
         //startDB2();
         //loadVenta();
 }
@@ -712,7 +713,7 @@ function startDBC(){
     dataBaseC = indexedDB2.open("Reporte",1);
     //indexedDB.createTable("djs");
     dataBaseC.onupgradeneeded=function(e){
-        alert("creado");
+        alert("Creada la base de datos de las ventas diarias!");
         var active =dataBaseC.result;
         var Option ={
             keyPath:'id',
@@ -742,6 +743,8 @@ function addC(sumaX){
         
        dataBaseC = indexedDB2.open("Reporte",1);
        //indexedDB.createTable("djs");
+
+       /*
        dataBaseC.onupgradeneeded=function(e){
            alert("creado");
            var active =dataBaseC.result;
@@ -754,7 +757,7 @@ function addC(sumaX){
            object.createIndex('diario','d',{unique:false});
            object.createIndex('semanal','s',{unique:false});
            object.createIndex('mensuales','m',{unique:false});
-       }
+       }*/
        dataBaseC.onsuccess=function(e){
            //loadAllC();
            //loadC();
@@ -771,7 +774,7 @@ function addC(sumaX){
             //loadAll();
         }
         var request = object.put({
-            day: sumaX
+            d: sumaX
         });
         
             
@@ -813,7 +816,7 @@ function addC(sumaX){
             var outerHMTL='';
             for(var key in elements){
             //	ide=elements[key].id+2;
-                dia=parseInt(elements[key].day)+parseInt(dia);
+                dia=parseInt(elements[key].d)+parseInt(dia);
 
             }
             console.log(dia);

@@ -17,7 +17,7 @@ function createDate(){
     dataDB = indexedDB.open("date",1);
     //indexedDB.createTable("djs");
     dataDB.onupgradeneeded=function(e){
-        alert("creado");
+        alert("Base de datos del balance creado!");
         var active =dataDB.result;
         var Option ={
             keyPath:'id',
@@ -40,10 +40,14 @@ function createDate(){
 		loadAllComplete();
 		//loadAllhist();
 		//count();
-        
+        auxFFF=false;
 setTimeout(() => {
-  console.log("Base de datos correctamente leida")
-}, 200);
+  console.log("Base de datos correctamente leida");
+  chart.update();
+  //location.reload();
+  updateAll();
+}, 500);
+
     }
 
 }
@@ -77,7 +81,7 @@ function LoadDate(){
 		//var outerHMTL='';
 		for(var key in elements){
 		//	ide=elements[key].id+2;
-			dia=parseInt(elements[key].day)+parseInt(dia);
+			dia=parseInt(elements[key].d)+parseInt(dia);
 
 		}
 		
@@ -328,11 +332,13 @@ function loadAllhist(){
 }
 
 if(document.getElementById("Gsemana")){
-	if(vectorito1.length==5){
+	//chart.update();
+	/*
+	if(vectorito1.length>=5){
 		vectorito1=[];
 		vectorito2=[];
 		vectorito3=[];
-	}
+	}*/
 let miCanvas=document.getElementById("Gsemana").getContext("2d");
 var chart=new Chart(miCanvas,{
     type:"bar",
@@ -340,7 +346,7 @@ var chart=new Chart(miCanvas,{
         labels:vectorito1,
         datasets:[
             {
-                label:"Ganancias diarias en la semana",  
+                label:"Ganancias diarias en el mes",  
                 fill  :true,  
                 data  :vectorito3,
                 backgroundColor  :  "rgb(105, 198, 220)",
@@ -348,6 +354,18 @@ var chart=new Chart(miCanvas,{
             }
         ]
     }
-	})
+	});
+	//chart.update();
 }
 ///////////////////
+var auxFFF=false;
+function updateAll(){
+	chart.update();
+	if(auxFFF=false){
+	for( var x=0; x<=10;x++){
+		location.reload();
+		//alert(x);
+	}
+	auxFFF=true;
+}
+}
