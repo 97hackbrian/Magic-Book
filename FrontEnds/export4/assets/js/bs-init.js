@@ -262,18 +262,18 @@ function loadAllComplete(){
 		for(var key in elements){
 			if(elements[key].vd!=undefined){
 
-				vectorito1[auxx]=elements[key-1].d+"/"+elements[key-1].m;
+				vectorito1[auxx]=(elements[key-1].d-1)+"/"+elements[key-1].m;
 				vectorito2[auxx]=elements[key-1].m;
 				vectorito3[auxx]=elements[key].vd;
 				auxx++;
-            outerHMTL2+='\n\
-            <tr>\n\
-            	<td class="text-center">'+elements[key-1].d + '</td>\n\
-                <td>'+elements[key-1].m + '</td>\n\
-                <td>'+elements[key].vd + '</td>\n\
-                </tr>';
+			outerHMTL2+='\n\
+			<tr>\n\
+				<td class="text-center">'+(elements[key-1].d-1) + '</td>\n\
+				<td>'+elements[key-1].m + '</td>\n\
+				<td>'+elements[key].vd + '</td>\n\
+				</tr>';
 			}
-        }
+		}
 		document.querySelector("#dataTable2x").innerHTML=outerHMTL2;
 		elements=[];
 	}
